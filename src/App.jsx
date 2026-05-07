@@ -1,7 +1,23 @@
+import Header from "./components/header/Header";
+import Hero from "./components/Hero";
+import ProductList from "./components/product/ProductList";
+import SidebarFilter from "./components/sidebar/SidebarFilter";
+import Sorting from "./components/Sorting";
+
 function App() {
   return (
     <>
-      <h1 class="text-3xl font-bold underline">Hello world!</h1>
+      <Header />
+      <main class="max-w-6xl mx-auto px-4 py-12 space-y-10">
+        <Hero />
+        <div class="grid grid-cols-1 md:grid-cols-4 gap-6">
+          <SidebarFilter />
+          <div class="md:col-span-3">
+            <Sorting />
+            <ProductList />
+          </div>
+        </div>
+      </main>
     </>
   );
 }
