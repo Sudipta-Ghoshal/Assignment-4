@@ -1,8 +1,8 @@
-export default function Ratting() {
+export default function Ratting({ ratingRate = 0, ratingCount = 0 }) {
   return (
-    <div class="flex items-center gap-2 text-sm">
-      <span class="text-amber-500">⭐ 4.8</span>
-      <span class="text-slate-500">(35 reviews)</span>
+    <div className="flex items-center gap-2 text-sm">
+      <span className="text-amber-500">Rating {ratingRate}</span>
+      <span className="text-slate-500">({ratingCount} reviews)</span>
     </div>
   );
 }

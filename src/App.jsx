@@ -8,11 +8,11 @@ function App() {
   return (
     <>
       <Header />
-      <main class="max-w-6xl mx-auto px-4 py-12 space-y-10">
+      <main className="max-w-6xl mx-auto px-4 py-12 space-y-10">
         <Hero />
-        <div class="grid grid-cols-1 md:grid-cols-4 gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
           <SidebarFilter />
-          <div class="md:col-span-3">
+          <div className="md:col-span-3">
             <Sorting />
             <ProductList />
           </div>
