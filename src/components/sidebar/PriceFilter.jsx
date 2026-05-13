@@ -1,25 +1,42 @@
-export default function PriceFilter() {
+const PRICE_RANGES = [
+  { id: "0-2000", label: "$0 - $2000", min: 0, max: 2000 },
+  { id: "2000-5000", label: "$2000 - $5000", min: 2000, max: 5000 },
+  { id: "5000-plus", label: "$5000+", min: 5000, max: Infinity },
+];
+
+export { PRICE_RANGES };
+
+export default function PriceFilter({
+  selectedPriceRanges,
+  onPriceRangeChange,
+}) {
+  const handlePriceRangeToggle = (rangeId) => {
+    if (selectedPriceRanges.includes(rangeId)) {
+      onPriceRangeChange(
+        selectedPriceRanges.filter((selectedRange) => selectedRange !== rangeId)
+      );
+      return;
+    }
+
+    onPriceRangeChange([...selectedPriceRanges, rangeId]);
+  };
+
   return (
     <div className="mb-6">
       <h4 className="font-medium text-sm mb-3 text-slate-700">Price Range</h4>
       <div className="space-y-2">
-        <label className="flex items-center cursor-pointer">
-          <input type="checkbox" name="price" className="w-4 h-4 text-rose-500" />
-          <span className="ml-3 text-sm text-slate-700">$0 - $2000</span>
-        </label>
-        <label className="flex items-center cursor-pointer">
-          <input type="checkbox" name="price" className="w-4 h-4 text-rose-500" />
-          <span className="ml-3 text-sm text-slate-700">$2000 - $5000</span>
-        </label>
-        <label className="flex items-center cursor-pointer">
-          <input
-            type="checkbox"
-            name="price"
-            defaultChecked
-            className="w-4 h-4 text-rose-500"
-          />
-          <span className="ml-3 text-sm text-slate-700">$5000+</span>
-        </label>
+        {PRICE_RANGES.map((range) => (
+          <label className="flex items-center cursor-pointer" key={range.id}>
+            <input
+              type="checkbox"
+              name="price"
+              checked={selectedPriceRanges.includes(range.id)}
+              onChange={() => handlePriceRangeToggle(range.id)}
+              className="w-4 h-4 text-rose-500"
+            />
+            <span className="ml-3 text-sm text-slate-700">{range.label}</span>
+          </label>
+        ))}
       </div>
     </div>
   );

@@ -1,7 +1,21 @@
 import { useCatagory } from "../../hooks";
 
-export default function CatagoryFilter() {
+export default function CatagoryFilter({
+  selectedCategories,
+  onCategoryChange,
+}) {
   const { catagory, loading, error } = useCatagory();
+
+  const handleCategoryToggle = (categoryName) => {
+    if (selectedCategories.includes(categoryName)) {
+      onCategoryChange(
+        selectedCategories.filter((category) => category !== categoryName)
+      );
+      return;
+    }
+
+    onCategoryChange([...selectedCategories, categoryName]);
+  };
 
   if (loading) {
     return <p className="text-accent">Loading categories...</p>;
@@ -18,7 +32,8 @@ export default function CatagoryFilter() {
             <label className="flex items-center cursor-pointer" key={item.id}>
               <input
                 type="checkbox"
-                defaultChecked
+                checked={selectedCategories.includes(item.name)}
+                onChange={() => handleCategoryToggle(item.name)}
                 className="w-4 h-4 text-rose-500 rounded border-slate-300"
               />
               <span className="ml-3 text-sm text-slate-700">{item.name}</span>
