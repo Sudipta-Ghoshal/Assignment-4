@@ -1,8 +1,13 @@
+import useFilter from "../../context/useFilter";
+
 const RATING_OPTIONS = [4.5, 4.0, 3.5];
 
-export default function RattingFilter({ selectedRating, onRatingChange }) {
+export default function RattingFilter() {
+  const { filters, updateFilters } = useFilter();
+  const selectedRating = filters.minRating;
+
   const handleRatingToggle = (rating) => {
-    onRatingChange(selectedRating === rating ? null : rating);
+    updateFilters("minRating", selectedRating === rating ? null : rating);
   };
 
   return (

@@ -1,4 +1,8 @@
+import useFilter from "../../context/useFilter";
+
 export default function Search() {
+  const { filters, updateFilters } = useFilter();
+
   return (
     <div className="hidden sm:block">
       <div className="flex items-center gap-2 px-3 py-2 rounded-full border border-slate-200 bg-white shadow-sm">
@@ -17,6 +21,8 @@ export default function Search() {
           type="text"
           placeholder="Search laptops, GPUs, desktops..."
           className="bg-transparent text-sm placeholder:text-slate-400 focus:outline-none w-64"
+          value={filters.searchTerm}
+          onChange={(e) => updateFilters("searchTerm", e.target.value)}
         />
       </div>
     </div>

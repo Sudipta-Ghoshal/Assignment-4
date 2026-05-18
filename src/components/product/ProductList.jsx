@@ -1,11 +1,13 @@
 import { useEffect, useMemo } from "react";
 
+import useFilter from "../../context/useFilter";
 import { useProduct } from "../../hooks";
 import { PRICE_RANGES } from "../sidebar/PriceFilter";
 import LoadingSkeleton from "./LoadingSkeleton";
 import ProductCard from "./ProductCard";
 
-export default function ProductList({ filters, onVisibleCountChange }) {
+export default function ProductList({ onVisibleCountChange }) {
+  const { filters } = useFilter();
   const { products, loading, error } = useProduct();
 
   const filteredProducts = useMemo(() => {
@@ -31,9 +33,22 @@ export default function ProductList({ filters, onVisibleCountChange }) {
       const matchesRating =
         filters.minRating === null || product.rating_rate >= filters.minRating;
 
-      return matchesCategory && matchesPrice && matchesRating;
+      const matchesSearchTerm =
+        filters.searchTerm === "" ||
+        product.title
+          .toLowerCase()
+          .includes(filters.searchTerm.toLowerCase()) ||
+        product.description
+          .toLowerCase()
+          .includes(filters.searchTerm.toLowerCase());
+
+      return (
+        matchesCategory && matchesPrice && matchesRating && matchesSearchTerm
+      );
     });
   }, [filters, products]);
+
+  console.log("Filtered products:", filteredProducts);
 
   useEffect(() => {
     if (!loading && !error) {

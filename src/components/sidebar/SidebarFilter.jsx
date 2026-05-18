@@ -1,16 +1,10 @@
+import useFilter from "../../context/useFilter";
 import CatagoryFilter from "./CatagoryFilter";
 import PriceFilter from "./PriceFilter";
 import RattingFilter from "./RattingFilter";
 
-export default function SidebarFilter({
-  filters,
-  onFilterChange,
-  onClearFilters,
-}) {
-  const hasActiveFilters =
-    filters.categories.length > 0 ||
-    filters.priceRanges.length > 0 ||
-    filters.minRating !== null;
+export default function SidebarFilter() {
+  const { clearFilters, hasActiveFilters } = useFilter();
 
   return (
     <div className="md:col-span-1 space-y-4">
@@ -19,7 +13,7 @@ export default function SidebarFilter({
           <h3 className="text-lg font-semibold text-slate-900">Filters</h3>
           <button
             type="button"
-            onClick={onClearFilters}
+            onClick={clearFilters}
             disabled={!hasActiveFilters}
             className="text-xs text-rose-500 font-semibold disabled:text-slate-300 disabled:cursor-not-allowed"
           >
@@ -27,24 +21,11 @@ export default function SidebarFilter({
           </button>
         </div>
 
-        <CatagoryFilter
-          selectedCategories={filters.categories}
-          onCategoryChange={(categories) =>
-            onFilterChange("categories", categories)
-          }
-        />
+        <CatagoryFilter />
 
-        <PriceFilter
-          selectedPriceRanges={filters.priceRanges}
-          onPriceRangeChange={(priceRanges) =>
-            onFilterChange("priceRanges", priceRanges)
-          }
-        />
+        <PriceFilter />
 
-        <RattingFilter
-          selectedRating={filters.minRating}
-          onRatingChange={(rating) => onFilterChange("minRating", rating)}
-        />
+        <RattingFilter />
       </div>
     </div>
   );

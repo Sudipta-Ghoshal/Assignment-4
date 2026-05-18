@@ -1,3 +1,5 @@
+import useFilter from "../../context/useFilter";
+
 const PRICE_RANGES = [
   { id: "0-2000", label: "$0 - $2000", min: 0, max: 2000 },
   { id: "2000-5000", label: "$2000 - $5000", min: 2000, max: 5000 },
@@ -6,19 +8,22 @@ const PRICE_RANGES = [
 
 export { PRICE_RANGES };
 
-export default function PriceFilter({
-  selectedPriceRanges,
-  onPriceRangeChange,
-}) {
+export default function PriceFilter() {
+  const { filters, updateFilters } = useFilter();
+  const selectedPriceRanges = filters.priceRanges;
+
   const handlePriceRangeToggle = (rangeId) => {
     if (selectedPriceRanges.includes(rangeId)) {
-      onPriceRangeChange(
-        selectedPriceRanges.filter((selectedRange) => selectedRange !== rangeId)
+      updateFilters(
+        "priceRanges",
+        selectedPriceRanges.filter(
+          (selectedRange) => selectedRange !== rangeId,
+        ),
       );
       return;
     }
 
-    onPriceRangeChange([...selectedPriceRanges, rangeId]);
+    updateFilters("priceRanges", [...selectedPriceRanges, rangeId]);
   };
 
   return (

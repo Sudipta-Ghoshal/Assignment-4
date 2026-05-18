@@ -1,20 +1,21 @@
+import useFilter from "../../context/useFilter";
 import { useCatagory } from "../../hooks";
 
-export default function CatagoryFilter({
-  selectedCategories,
-  onCategoryChange,
-}) {
+export default function CatagoryFilter() {
+  const { filters, updateFilters } = useFilter();
   const { catagory, loading, error } = useCatagory();
+  const selectedCategories = filters.categories;
 
   const handleCategoryToggle = (categoryName) => {
     if (selectedCategories.includes(categoryName)) {
-      onCategoryChange(
-        selectedCategories.filter((category) => category !== categoryName)
+      updateFilters(
+        "categories",
+        selectedCategories.filter((category) => category !== categoryName),
       );
       return;
     }
 
-    onCategoryChange([...selectedCategories, categoryName]);
+    updateFilters("categories", [...selectedCategories, categoryName]);
   };
 
   if (loading) {
