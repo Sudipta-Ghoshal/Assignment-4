@@ -1,4 +1,8 @@
+import useSort from "../context/useSort";
+
 export default function Sorting({ productCount }) {
+  const { sort, setSort } = useSort();
+
   return (
     <div className="flex items-center justify-between mb-6">
       <p className="text-slate-600">Showing {productCount} products</p>
@@ -9,11 +13,13 @@ export default function Sorting({ productCount }) {
         <select
           id="sort"
           className="px-3 py-2 border border-slate-200 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-rose-300 bg-white"
+          value={sort}
+          onChange={(e) => setSort(e.target.value)}
         >
-          <option>Newest</option>
-          <option>Oldest</option>
-          <option>Price: Low to High</option>
-          <option>Price: High to Low</option>
+          <option value="newest">Newest</option>
+          <option value="oldest">Oldest</option>
+          <option value="price-low-high">Price: Low to High</option>
+          <option value="price-high-low">Price: High to Low</option>
         </select>
       </div>
     </div>

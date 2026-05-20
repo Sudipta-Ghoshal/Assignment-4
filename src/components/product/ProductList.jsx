@@ -1,6 +1,7 @@
 import { useEffect, useMemo } from "react";
 
 import useFilter from "../../context/useFilter";
+import useSort from "../../context/useSort";
 import { useProduct } from "../../hooks";
 import { PRICE_RANGES } from "../sidebar/PriceFilter";
 import LoadingSkeleton from "./LoadingSkeleton";
@@ -9,7 +10,9 @@ import ProductCard from "./ProductCard";
 export default function ProductList({ onVisibleCountChange }) {
   const { filters } = useFilter();
   const { products, loading, error } = useProduct();
+  const { sort } = useSort();
 
+  // Filter products based on selected filters
   const filteredProducts = useMemo(() => {
     return products.filter((product) => {
       const matchesCategory =
@@ -48,7 +51,27 @@ export default function ProductList({ onVisibleCountChange }) {
     });
   }, [filters, products]);
 
-  console.log("Filtered products:", filteredProducts);
+  // Sort filtered products based on selected sort option
+  const sortedProducts = useMemo(() => {
+    const productsToSort = [...filteredProducts];
+
+    switch (sort) {
+      case "newest":
+        return productsToSort.sort(
+          (a, b) => new Date(b.createdAt) - new Date(a.createdAt),
+        );
+      case "oldest":
+        return productsToSort.sort(
+          (a, b) => new Date(a.createdAt) - new Date(b.createdAt),
+        );
+      case "price-low-high":
+        return productsToSort.sort((a, b) => a.price - b.price);
+      case "price-high-low":
+        return productsToSort.sort((a, b) => b.price - a.price);
+      default:
+        return productsToSort;
+    }
+  }, [filteredProducts, sort]);
 
   useEffect(() => {
     if (!loading && !error) {
@@ -84,7 +107,7 @@ export default function ProductList({ onVisibleCountChange }) {
 
   return (
     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-      {filteredProducts.map((product) => (
+      {sortedProducts.map((product) => (
         <ProductCard key={product.id} product={product} />
       ))}
     </div>
