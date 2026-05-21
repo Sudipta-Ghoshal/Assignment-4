@@ -1,9 +1,9 @@
-import useFilter from "../../context/useFilter";
+import useProducts from "../../products/context/useProducts";
 
 const RATING_OPTIONS = [4.5, 4.0, 3.5];
 
-export default function RattingFilter() {
-  const { filters, updateFilters } = useFilter();
+export default function RatingFilter() {
+  const { filters, updateFilters } = useProducts();
   const selectedRating = filters.minRating;
 
   const handleRatingToggle = (rating) => {

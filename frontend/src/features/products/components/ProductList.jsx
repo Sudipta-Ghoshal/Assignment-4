@@ -1,16 +1,13 @@
 import { useEffect, useMemo } from "react";
-
-import useFilter from "../../context/useFilter";
-import useSort from "../../context/useSort";
-import { useProduct } from "../../hooks";
-import { PRICE_RANGES } from "../sidebar/PriceFilter";
+import useProducts from "../context/useProducts";
+import useProductsData from "../hooks/useProductsData";
+import PRICE_RANGES from "../../filters/config/priceRanges";
 import LoadingSkeleton from "./LoadingSkeleton";
 import ProductCard from "./ProductCard";
 
 export default function ProductList({ onVisibleCountChange }) {
-  const { filters } = useFilter();
-  const { products, loading, error } = useProduct();
-  const { sort } = useSort();
+  const { filters, sort } = useProducts();
+  const { products, loading, error } = useProductsData();
 
   // Filter products based on selected filters
   const filteredProducts = useMemo(() => {

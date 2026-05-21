@@ -1,6 +1,7 @@
 import Cart from "./Cart";
 import Logo from "./Logo";
 import Search from "./Search";
+
 export default function Header() {
   return (
     <nav className="sticky top-0 z-50 bg-white/90 backdrop-blur border-b border-slate-200">

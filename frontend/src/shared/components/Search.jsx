@@ -1,7 +1,7 @@
-import useFilter from "../../context/useFilter";
+import useProducts from "../../features/products/context/useProducts";
 
 export default function Search() {
-  const { filters, updateFilters } = useFilter();
+  const { filters, updateFilters } = useProducts();
 
   return (
     <div className="hidden sm:block">

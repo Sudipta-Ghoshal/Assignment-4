@@ -1,32 +1,29 @@
 import { useState } from "react";
 
-import Header from "./components/header/Header";
-import Hero from "./components/Hero";
-import ProductList from "./components/product/ProductList";
-import SidebarFilter from "./components/sidebar/SidebarFilter";
-import Sorting from "./components/Sorting";
-import FilterProvider from "./context/FilterProvider";
-import SortProvider from "./context/SortProvider";
+import Header from "./shared/components/Header";
+import Hero from "./shared/components/Hero";
+import ProductList from "./features/products/components/ProductList";
+import SidebarFilter from "./features/filters/components/SidebarFilter";
+import Sorting from "./features/products/components/Sorting";
+import ProductsProvider from "./features/products/context/ProductsProvider";
 
 function App() {
   const [visibleProductCount, setVisibleProductCount] = useState(0);
 
   return (
-    <SortProvider>
-      <FilterProvider>
-        <Header />
-        <main className="max-w-6xl mx-auto px-4 py-12 space-y-10">
-          <Hero />
-          <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
-            <SidebarFilter />
-            <div className="md:col-span-3">
-              <Sorting productCount={visibleProductCount} />
-              <ProductList onVisibleCountChange={setVisibleProductCount} />
-            </div>
+    <ProductsProvider>
+      <Header />
+      <main className="max-w-6xl mx-auto px-4 py-12 space-y-10">
+        <Hero />
+        <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
+          <SidebarFilter />
+          <div className="md:col-span-3">
+            <Sorting productCount={visibleProductCount} />
+            <ProductList onVisibleCountChange={setVisibleProductCount} />
           </div>
-        </main>
-      </FilterProvider>
-    </SortProvider>
+        </div>
+      </main>
+    </ProductsProvider>
   );
 }
 

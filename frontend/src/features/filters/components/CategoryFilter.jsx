@@ -1,9 +1,9 @@
-import useFilter from "../../context/useFilter";
-import { useCatagory } from "../../hooks";
+import useProducts from "../../products/context/useProducts";
+import useCategoriesData from "../hooks/useCategoriesData";
 
-export default function CatagoryFilter() {
-  const { filters, updateFilters } = useFilter();
-  const { catagory, loading, error } = useCatagory();
+export default function CategoryFilter() {
+  const { filters, updateFilters } = useProducts();
+  const { categories, loading, error } = useCategoriesData();
   const selectedCategories = filters.categories;
 
   const handleCategoryToggle = (categoryName) => {
@@ -22,14 +22,14 @@ export default function CatagoryFilter() {
     return <p className="text-accent">Loading categories...</p>;
   } else if (error) {
     return <p className="text-rose-500">Error loading categories: {error}</p>;
-  } else if (catagory.length === 0) {
+  } else if (categories.length === 0) {
     return <p className="text-slate-500">No categories found.</p>;
   } else {
     return (
       <div className="mb-6">
         <h4 className="font-medium text-sm mb-3 text-slate-700">Category</h4>
         <div className="space-y-2">
-          {catagory.map((item) => (
+          {categories.map((item) => (
             <label className="flex items-center cursor-pointer" key={item.id}>
               <input
                 type="checkbox"

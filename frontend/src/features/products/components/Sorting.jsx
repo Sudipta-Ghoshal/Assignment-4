@@ -1,7 +1,7 @@
-import useSort from "../context/useSort";
+import useProducts from "../context/useProducts";
 
 export default function Sorting({ productCount }) {
-  const { sort, setSort } = useSort();
+  const { sort, setSort } = useProducts();
 
   return (
     <div className="flex items-center justify-between mb-6">

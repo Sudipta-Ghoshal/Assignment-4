@@ -1,9 +1,9 @@
+import { memo } from "react";
 import CreateDate from "./CreateDate";
-import Ratting from "./Ratting";
+import Rating from "./Rating";
+import getImageUrl from "../../../shared/utils/getImageUrl";
 
-import getImageUrl from "../../utils/getImage-utils";
-
-export default function ProductCard({ product }) {
+function ProductCard({ product }) {
   const imageUrl = getImageUrl(product.image);
 
   return (
@@ -21,14 +21,16 @@ export default function ProductCard({ product }) {
             {product.title}
           </h3>
         </div>
-        <Ratting
+        <Rating
           ratingRate={product.rating_rate}
           ratingCount={product.rating_count}
         />
 
         <CreateDate createdAt={product.createdAt} />
 
-        <p className="text-slate-600 text-sm line-clamp-2">{product.description}</p>
+        <p className="text-slate-600 text-sm line-clamp-2">
+          {product.description}
+        </p>
         <div className="flex items-center justify-between">
           <span className="text-2xl font-bold text-slate-900">
             ${product.price}
@@ -44,3 +46,8 @@ export default function ProductCard({ product }) {
     </div>
   );
 }
+
+// Memoize to prevent re-renders when parent updates but product hasn't changed
+export default memo(ProductCard, (prev, next) =>
+  prev.product.id === next.product.id
+);

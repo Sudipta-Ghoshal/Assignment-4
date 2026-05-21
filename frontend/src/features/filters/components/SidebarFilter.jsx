@@ -1,10 +1,10 @@
-import useFilter from "../../context/useFilter";
-import CatagoryFilter from "./CatagoryFilter";
+import useProducts from "../../products/context/useProducts";
+import CategoryFilter from "./CategoryFilter";
 import PriceFilter from "./PriceFilter";
-import RattingFilter from "./RattingFilter";
+import RatingFilter from "./RatingFilter";
 
 export default function SidebarFilter() {
-  const { clearFilters, hasActiveFilters } = useFilter();
+  const { clearFilters, hasActiveFilters } = useProducts();
 
   return (
     <div className="md:col-span-1 space-y-4">
@@ -21,11 +21,11 @@ export default function SidebarFilter() {
           </button>
         </div>
 
-        <CatagoryFilter />
+        <CategoryFilter />
 
         <PriceFilter />
 
-        <RattingFilter />
+        <RatingFilter />
       </div>
     </div>
   );
