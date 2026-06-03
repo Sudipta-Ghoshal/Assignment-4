@@ -1,16 +1,57 @@
-# React + Vite
+# TechHub - E-commerce Platform
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A modern e-commerce application built with React + Vite on the frontend and Express.js on the backend.
 
-Currently, two official plugins are available:
+## Quick Start
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+See [SETUP.md](./SETUP.md) for detailed setup and development instructions.
 
-## React Compiler
+### Quick Commands
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+```bash
+# Install dependencies for both frontend and backend
+npm install
 
-## Expanding the ESLint configuration
+# Start backend (Terminal 1)
+npm run backend
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+# Start frontend (Terminal 2)
+npm run frontend
+
+# Build for production
+npm run build
+```
+
+## Project Structure
+
+- **frontend/** - React + Vite frontend application
+- **backend/** - Express.js REST API server
+- **.env** - Shared environment variables
+
+## Features
+
+- 🛍️ Product catalog with filtering and search
+- 🔍 Category management
+- 📦 Shopping cart functionality
+- 🛒 Order management
+- 🖼️ Product image uploads
+- 💅 Responsive design with Tailwind CSS
+
+## Tech Stack
+
+**Frontend:**
+- React 19
+- Vite
+- Tailwind CSS
+- React Context API
+
+**Backend:**
+- Express.js
+- SQLite with Sequelize
+- CORS enabled
+- File upload support (Multer)
+
+## Development
+
+Frontend runs on `http://localhost:5173`
+Backend runs on `http://localhost:9000`
