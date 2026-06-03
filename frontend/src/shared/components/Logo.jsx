@@ -1,3 +1,5 @@
+import { Link } from "react-router";
+
 export default function Logo() {
   return (
     <div className="flex items-center gap-4">
@@ -5,10 +7,15 @@ export default function Logo() {
         TH
       </div>
       <div className="flex flex-col">
-        <a href="#" className="text-xl font-semibold text-slate-900 tracking-tight">
+        <Link
+          to="/"
+          className="text-xl font-semibold text-slate-900 tracking-tight"
+        >
           TechHub
-        </a>
-        <span className="text-xs text-slate-500">Gear for builders & dreamers</span>
+        </Link>
+        <span className="text-xs text-slate-500">
+          Gear for builders & dreamers
+        </span>
       </div>
     </div>
   );
