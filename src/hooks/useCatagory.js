@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+const API_BASE_URL = "http://localhost:9000";
 
 function useCatagory() {
     const [loading, setLoading] = useState(true);
@@ -14,7 +15,7 @@ function useCatagory() {
             setError(null);
 
             try {
-                const response = await fetch(`${import.meta.env.VITE_API_BASE_URL}/categories`);
+                const response = await fetch(`${API_BASE_URL}/categories`);
 
                 if (!response.ok) {
                     throw new Error("Failed to fetch categories");

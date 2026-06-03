@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 
+const API_BASE_URL = "http://localhost:9000";
 
 function useProduct() {
     const [products, setProducts] = useState([]);
@@ -15,7 +16,7 @@ function useProduct() {
             setError(null);
 
             try {
-                const response = await fetch(`${import.meta.env.VITE_API_BASE_URL}/products`);
+                const response = await fetch(`${API_BASE_URL}/products`);
 
                 if (!response.ok) {
                     throw new Error("Failed to fetch products");
