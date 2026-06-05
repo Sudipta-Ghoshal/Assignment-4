@@ -1,8 +1,10 @@
+import { useCart } from "../hooks/useCart";
 import Logo from "./Logo";
 import Search from "./Search";
 import { Link } from "react-router";
 
 export default function Header() {
+  const { cartCount } = useCart();
   return (
     <nav className="sticky top-0 z-50 bg-white/90 backdrop-blur border-b border-slate-200">
       <div className="max-w-6xl mx-auto px-4 py-4 flex items-center justify-between">
@@ -42,7 +44,7 @@ export default function Header() {
             </svg>
             <span className="text-sm font-semibold text-slate-900">Cart</span>
             <span className="absolute -top-2 -right-2 h-5 w-5 rounded-full bg-rose-500 text-white text-xs font-bold flex items-center justify-center shadow">
-              3
+              {cartCount}
             </span>
           </Link>
         </div>

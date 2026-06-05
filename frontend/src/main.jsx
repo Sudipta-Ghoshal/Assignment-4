@@ -3,10 +3,11 @@ import { createRoot } from "react-dom/client";
 import "./index.css";
 import { createBrowserRouter } from "react-router";
 import { RouterProvider } from "react-router/dom";
-import Root from "./routes/root.jsx";
+import Root from "./routes/Root.jsx";
 import ErrorPage from "./shared/components/ErrorPage.jsx";
 import Cart from "./shared/components/Cart.jsx";
 import Dashboard from "./shared/components/Dashboard.jsx";
+import CartProvider from "./shared/context/CartProvider.jsx";
 
 const router = createBrowserRouter([
   {
@@ -28,6 +29,8 @@ const router = createBrowserRouter([
 
 createRoot(document.getElementById("root")).render(
   <StrictMode>
-    <RouterProvider router={router} />
+    <CartProvider>
+      <RouterProvider router={router} />
+    </CartProvider>
   </StrictMode>,
 );

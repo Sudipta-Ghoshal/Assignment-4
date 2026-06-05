@@ -1,7 +1,7 @@
 import { memo } from "react";
 import getImageUrl from "../../../shared/utils/getImageUrl";
 
-function ProductCard({ product }) {
+function ProductCard({ product, onAddToCart }) {
   const imageUrl = getImageUrl(product.image);
 
   const formattedDate = product.createdAt
@@ -52,7 +52,10 @@ function ProductCard({ product }) {
           </span>
         </div>
 
-        <button className="w-full button-primary py-2.5 rounded-lg font-semibold hover:opacity-90 transition-opacity">
+        <button
+          className="w-full button-primary py-2.5 rounded-lg font-semibold hover:opacity-90 transition-opacity"
+          onClick={() => onAddToCart(product.id, 1)}
+        >
           Add to Cart
         </button>
       </div>

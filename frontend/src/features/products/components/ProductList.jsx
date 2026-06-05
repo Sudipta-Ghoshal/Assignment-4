@@ -4,10 +4,12 @@ import { useProductsData } from "../../../shared/hooks/useProductsData";
 import PRICE_RANGES from "../../filters/config/priceRanges";
 import LoadingSkeleton from "./LoadingSkeleton";
 import ProductCard from "./ProductCard";
+import { useCart } from "../../../shared/hooks/useCart";
 
 export default function ProductList({ onVisibleCountChange }) {
   const { filters, sort } = useProducts();
   const { products, loading, error } = useProductsData();
+  const { addToCart } = useCart();
 
   // Filter products based on selected filters
   const filteredProducts = useMemo(() => {
@@ -109,7 +111,11 @@ export default function ProductList({ onVisibleCountChange }) {
   return (
     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
       {sortedProducts.map((product) => (
-        <ProductCard key={product.id} product={product} />
+        <ProductCard
+          key={product.id}
+          product={product}
+          onAddToCart={addToCart}
+        />
       ))}
     </div>
   );
